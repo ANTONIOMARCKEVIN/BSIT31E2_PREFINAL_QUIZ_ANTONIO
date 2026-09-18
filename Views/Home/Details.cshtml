@@ -1,0 +1,68 @@
+﻿@model IT_ELECTIVE_2_Midterm_A1_Antonio_MarcKevin.Models.Project
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container my-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <span class="badge bg-info text-dark mb-2">@Model.Category</span>
+            <h1 class="fw-bold mb-3">@Model.Title</h1>
+
+            <img src="@Model.ThumbnailUrl" class="img-fluid rounded shadow-sm mb-4 w-100" alt="@Model.Title" style="max-height: 400px; object-fit: cover;">
+
+            <h3 class="h5 fw-bold">Overview</h3>
+            <p class="lead">@Model.ShortDescription</p>
+            <p>@Model.FullDescription</p>
+
+            <a href="@Model.GitHubUrl" target="_blank" class="btn btn-dark mb-5">🔗 Open GitHub Repository</a>
+
+            <hr />
+
+            <!-- Comment Section -->
+            <h3 class="mb-4">💬 Comments (@Model.Comments.Count)</h3>
+
+            <div class="list-group mb-4">
+                @if (!Model.Comments.Any())
+                {
+                    <div class="alert alert-light border">No comments yet. Be the first to leave feedback below!</div>
+                }
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="list-group-item py-3">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1 fw-bold">@comment.Author</h6>
+                            <small class="text-muted">@comment.DateAdded.ToString("yyyy-MM-dd HH:mm")</small>
+                        </div>
+                        <p class="mb-0 text-secondary">@comment.Content</p>
+                    </div>
+                }
+            </div>
+
+            <!-- Add Comment Form -->
+            <div class="card shadow-sm border-0 p-4 bg-light">
+                <h5 class="mb-3">Leave a Comment</h5>
+                <form asp-action="AddComment" method="post">
+                    <input type="hidden" name="projectId" value="@Model.Id" />
+                    <div class="mb-3">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" name="author" class="form-control" required placeholder="e.g. Juan Cruz" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Comment</label>
+                        <textarea name="content" class="form-control" rows="3" required placeholder="Write your feedback..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Post Comment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
