@@ -47,4 +47,4 @@ This application serves as a modern web-based portfolio built with **ASP.NET Cor
 ## 🚀 Setup & Running Locally
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/ANTONIOMARCKEVIN/IT_ELECTIVE_2_Midterm_A1_Antonio_MarcKevin.git](https://github.com/ANTONIOMARCKEVIN/IT_ELECTIVE_2_Midterm_A1_Antonio_MarcKevin.git)
+   git clone [https://github.com/ANTONIOMARCKEVIN/BSIT31E2_PREFINAL_QUIZ_ANTONIO]
