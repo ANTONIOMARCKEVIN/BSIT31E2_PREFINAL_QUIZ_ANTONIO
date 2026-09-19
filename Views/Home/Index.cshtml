@@ -5,61 +5,62 @@
     var categories = Model.Select(p => p.Category).Distinct().ToList();
 }
 
-<div class="container my-4">
+<div class="container my-4 text-light">
+    <!-- Header Section -->
     <div class="text-center mb-5">
-        <h1 class="display-4 fw-bold">Marc Kevin Antonio</h1>
-        <p class="text-muted lead">Modern ASP.NET Core MVC Portfolio & GitHub Repository Showcase</p>
+        <h1 class="display-4 fw-bold text-white">Marc Kevin Antonio</h1>
+        <p class="text-secondary lead">Modern ASP.NET Core MVC Portfolio & GitHub Repository Showcase</p>
 
         @if (User.Identity?.IsAuthenticated == true)
         {
-            <div class="alert alert-success d-inline-block py-2 px-4">
-                Logged in as <strong>@User.Identity.Name</strong> | <a asp-controller="Account" asp-action="Logout" class="alert-link">Logout</a>
+            <div class="alert alert-success d-inline-block py-2 px-4 bg-dark border-success text-success">
+                Logged in as <strong class="text-white">@User.Identity.Name</strong> | <a asp-controller="Account" asp-action="Logout" class="alert-link text-success">Logout</a>
             </div>
         }
         else
         {
-            <a asp-controller="Account" asp-action="Login" class="btn btn-dark btn-sm">Admin Login</a>
+            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light btn-sm">Authorize Login</a>
         }
     </div>
 
     <!-- Table of Contents -->
-    <div class="card mb-5 shadow-sm border-0 bg-light">
+    <div class="card mb-5 shadow-sm border border-secondary bg-dark text-light">
         <div class="card-body">
-            <h3 class="card-title h5 mb-3">📑 Table of Contents</h3>
-            <p class="text-muted small mb-2">Filter projects by category:</p>
+            <h3 class="card-title h5 mb-3 text-white">📑 Table of Contents</h3>
+            <p class="text-secondary small mb-2">Filter projects by category:</p>
             <div class="d-flex flex-wrap gap-2 mb-3">
-                <a href="#all-projects" class="btn btn-outline-dark btn-sm">All Projects (@Model.Count())</a>
+                <a href="#all-projects" class="btn btn-outline-light btn-sm">All Projects (@Model.Count())</a>
                 @foreach (var cat in categories)
                 {
-                    <a href="#category-@cat" class="btn btn-outline-primary btn-sm">@cat (@Model.Count(p => p.Category == cat))</a>
+                    <a href="#category-@cat" class="btn btn-outline-info btn-sm">@cat (@Model.Count(p => p.Category == cat))</a>
                 }
             </div>
-            <ul class="mb-0 small text-muted">
-                <li><a href="#all-projects" class="text-decoration-none">Complete Project List</a></li>
-                <li><a href="/Account/Login" class="text-decoration-none">Admin Login Portal</a></li>
+            <ul class="mb-0 small text-secondary">
+                <li><a href="#all-projects" class="text-decoration-none text-info">Complete Project List</a></li>
+                <li><a href="/Account/Login" class="text-decoration-none text-info">Admin Login Portal</a></li>
             </ul>
         </div>
     </div>
 
     <!-- Projects Grid -->
-    <h2 id="all-projects" class="mb-4">GitHub Projects Directory</h2>
+    <h2 id="all-projects" class="mb-4 text-white">GitHub Projects Directory</h2>
 
     @foreach (var cat in categories)
     {
-        <h3 id="category-@cat" class="mt-4 mb-3 text-primary border-bottom pb-2">@cat</h3>
+        <h3 id="category-@cat" class="mt-4 mb-3 text-info border-bottom border-secondary pb-2">@cat</h3>
         <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
             @foreach (var proj in Model.Where(p => p.Category == cat))
             {
                 <div class="col">
-                    <div class="card h-100 shadow-sm border-0">
-                        <img src="@proj.ThumbnailUrl" class="card-img-top" alt="@proj.Title" style="height: 180px; object-fit: cover;">
+                    <div class="card h-100 shadow-sm border border-secondary bg-dark text-light">
+                        <img src="@proj.ThumbnailUrl" class="card-img-top border-bottom border-secondary" alt="@proj.Title" style="height: 180px; object-fit: cover;">
                         <div class="card-body d-flex flex-column">
-                            <span class="badge bg-secondary mb-2 align-self-start">@proj.Category</span>
-                            <h5 class="card-title text-truncate" title="@proj.Title">@proj.Title</h5>
-                            <p class="card-text text-muted small">@proj.ShortDescription</p>
+                            <span class="badge bg-info text-dark mb-2 align-self-start">@proj.Category</span>
+                            <h5 class="card-title text-truncate text-white" title="@proj.Title">@proj.Title</h5>
+                            <p class="card-text text-secondary small">@proj.ShortDescription</p>
                             <div class="mt-auto">
-                                <a asp-action="Details" asp-route-id="@proj.Id" class="btn btn-primary btn-sm w-100 mb-2">View Details & Comments</a>
-                                <a href="@proj.GitHubUrl" target="_blank" class="btn btn-outline-secondary btn-sm w-100">GitHub Repository</a>
+                                <a asp-action="Details" asp-route-id="@proj.Id" class="btn btn-info text-dark fw-bold btn-sm w-100 mb-2">View Details & Comments</a>
+                                <a href="@proj.GitHubUrl" target="_blank" class="btn btn-outline-light btn-sm w-100">GitHub Repository</a>
                             </div>
                         </div>
                     </div>

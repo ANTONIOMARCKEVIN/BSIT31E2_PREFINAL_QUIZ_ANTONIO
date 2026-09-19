@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using IT_ELECTIVE_2_Midterm_A1_Antonio_MarcKevin.Data;
 using IT_ELECTIVE_2_Midterm_A1_Antonio_MarcKevin.Models;
 
 namespace IT_ELECTIVE_2_Midterm_A1_Antonio_MarcKevin.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()

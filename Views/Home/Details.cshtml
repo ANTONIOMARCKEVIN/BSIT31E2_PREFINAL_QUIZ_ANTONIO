@@ -4,63 +4,64 @@
     ViewData["Title"] = Model.Title;
 }
 
-<div class="container my-5">
+<div class="container my-5 text-light">
+    <!-- Breadcrumb -->
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">@Model.Title</li>
+        <ol class="breadcrumb bg-dark p-2 rounded">
+            <li class="breadcrumb-item"><a asp-action="Index" class="text-info text-decoration-none">Home</a></li>
+            <li class="breadcrumb-item active text-light" aria-current="page">@Model.Title</li>
         </ol>
     </nav>
 
     <div class="row">
         <div class="col-lg-8 offset-lg-2">
             <span class="badge bg-info text-dark mb-2">@Model.Category</span>
-            <h1 class="fw-bold mb-3">@Model.Title</h1>
+            <h1 class="fw-bold mb-3 text-white">@Model.Title</h1>
 
-            <img src="@Model.ThumbnailUrl" class="img-fluid rounded shadow-sm mb-4 w-100" alt="@Model.Title" style="max-height: 400px; object-fit: cover;">
+            <img src="@Model.ThumbnailUrl" class="img-fluid rounded shadow-sm mb-4 w-100 border border-secondary" alt="@Model.Title" style="max-height: 400px; object-fit: cover;">
 
-            <h3 class="h5 fw-bold">Overview</h3>
-            <p class="lead">@Model.ShortDescription</p>
-            <p>@Model.FullDescription</p>
+            <h3 class="h5 fw-bold text-white">Overview</h3>
+            <p class="lead text-light">@Model.ShortDescription</p>
+            <p class="text-secondary">@Model.FullDescription</p>
 
-            <a href="@Model.GitHubUrl" target="_blank" class="btn btn-dark mb-5">🔗 Open GitHub Repository</a>
+            <a href="@Model.GitHubUrl" target="_blank" class="btn btn-outline-light mb-5">🔗 Open GitHub Repository</a>
 
-            <hr />
+            <hr class="border-secondary" />
 
             <!-- Comment Section -->
-            <h3 class="mb-4">💬 Comments (@Model.Comments.Count)</h3>
+            <h3 class="mb-4 text-white">💬 Comments (@Model.Comments.Count)</h3>
 
-            <div class="list-group mb-4">
+            <div class="list-group mb-4 bg-dark">
                 @if (!Model.Comments.Any())
                 {
-                    <div class="alert alert-light border">No comments yet. Be the first to leave feedback below!</div>
+                    <div class="alert alert-dark border border-secondary text-light">No comments yet. Be the first to leave feedback below!</div>
                 }
                 @foreach (var comment in Model.Comments)
                 {
-                    <div class="list-group-item py-3">
+                    <div class="list-group-item bg-dark border-secondary text-light py-3">
                         <div class="d-flex w-100 justify-content-between">
-                            <h6 class="mb-1 fw-bold">@comment.Author</h6>
+                            <h6 class="mb-1 fw-bold text-info">@comment.Author</h6>
                             <small class="text-muted">@comment.DateAdded.ToString("yyyy-MM-dd HH:mm")</small>
                         </div>
-                        <p class="mb-0 text-secondary">@comment.Content</p>
+                        <p class="mb-0 text-light">@comment.Content</p>
                     </div>
                 }
             </div>
 
             <!-- Add Comment Form -->
-            <div class="card shadow-sm border-0 p-4 bg-light">
-                <h5 class="mb-3">Leave a Comment</h5>
+            <div class="card shadow-sm border border-secondary p-4 bg-dark text-light">
+                <h5 class="mb-3 text-white">Leave a Comment</h5>
                 <form asp-action="AddComment" method="post">
                     <input type="hidden" name="projectId" value="@Model.Id" />
                     <div class="mb-3">
-                        <label class="form-label">Your Name</label>
-                        <input type="text" name="author" class="form-control" required placeholder="e.g. Juan Cruz" />
+                        <label class="form-label text-light">Your Name</label>
+                        <input type="text" name="author" class="form-control bg-black text-light border-secondary" required placeholder="e.g. Juan Cruz" />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Comment</label>
-                        <textarea name="content" class="form-control" rows="3" required placeholder="Write your feedback..."></textarea>
+                        <label class="form-label text-light">Comment</label>
+                        <textarea name="content" class="form-control bg-black text-light border-secondary" rows="3" required placeholder="Write your feedback..."></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Post Comment</button>
+                    <button type="submit" class="btn btn-info text-dark fw-bold">Post Comment</button>
                 </form>
             </div>
         </div>
